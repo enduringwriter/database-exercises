@@ -52,6 +52,8 @@ SELECT COUNT(*) FROM employees WHERE last_name LIKE '%E' AND last_name NOT LIKE 
 SELECT * FROM employees WHERE last_name LIKE 'E%' AND last_name LIKE '%E';
 SELECT COUNT(*) FROM employees WHERE last_name LIKE 'E%' AND last_name LIKE '%E';
 
+Select * FROM employees WHERE last_name LIKE 'E%e';
+
 -- Q7a: How many employees' last names end with E, regardless of whether they start with E?
 -- 24,292 records
 SELECT * FROM employees WHERE last_name LIKE '%E';
@@ -61,6 +63,8 @@ SELECT COUNT(*) FROM employees WHERE last_name LIKE '%E';
 -- 135,214 records
 SELECT * FROM employees WHERE hire_date >= '1990-01-01' AND hire_date <= '1999-12-31';
 SELECT COUNT(*) FROM employees WHERE hire_date >= '1990-01-01' AND hire_date <= '1999-12-31';
+
+SELECT * FROM employees WHERE hire_date LIKE '199%';
 
 -- Q9: Find all current or previous employees born on Christmas
 --  842 records
@@ -74,7 +78,7 @@ SELECT COUNT(*) FROM employees WHERE hire_date LIKE '199%' AND birth_date LIKE '
 
 -- Q11: Find all current or previous employees with a 'q' in their last name
 -- 1873 records
-SELECT * FROM employees WHERE last_name LIKE '%q%';
+SELECT first_name, last_name FROM employees WHERE last_name LIKE '%q%';
 SELECT COUNT(*) FROM employees WHERE last_name LIKE '%q%';
 
 -- Q12: Find all current or previous employees with a 'q' in their last name but not 'qu'

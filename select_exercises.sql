@@ -19,20 +19,32 @@ SHOW TABLES;
 
 -- Q3: Explore the table albums
 -- albums table has 6 columns: id, artist, name, release_date, sales, genre
+-- each unique listing by PK id can have multiple genres
 DESCRIBE albums;
 
--- Q3a: How many rows are in the albums table? A: 31
+-- Q3a: How many rows are in the albums table?
+-- 31
 SELECT * FROM albums;
 
 -- Q3b: How many unique artist names are in the albums table?
+-- 23
 SELECT DISTINCT artist FROM albums;
 
--- Q3c: What is the primary key for the albums table? A: id
+-- NOTE that the following command does not work b/c multiple ids appear for a unique artist
+-- SELECT id, DISTINCT artist FROM albums;
+
+-- Q3c: What is the primary key for the albums table?
+-- id
 DESCRIBE albums;
 
 -- Q3d: What is the oldest release date for any album in the albums table? What is the most recent release date?
 SELECT * FROM albums ORDER BY release_date ASC LIMIT 1;
+SELECT min(release_date) FROM albums;
+
 SELECT * FROM albums ORDER BY release_date DESC LIMIT 1;
+SELECT max(release_date) FROM albums;
+
+SELECT min(release_date), max(release_date) FROM albums;
 
 -- Q4a: The name of all albums by Pink Floyd
 SELECT artist, name FROM albums WHERE artist = 'Pink Floyd';
@@ -46,6 +58,7 @@ SELECT name, genre FROM albums where name = 'Nevermind';
 
 -- Q4d: Which albums were released in the 1990s
 SELECT name, release_date FROM albums WHERE release_date >= 1990 AND release_date <= 1999;
+SELECT name, release_date FROM albums WHERE release_date BETWEEN 1990 AND 1999;
 
 -- Q4e: Which albums had less than 20 million certified sales
 SELECT name, sales FROM albums WHERE sales < 20.0 ORDER BY sales DESC;
@@ -53,3 +66,4 @@ SELECT name, sales FROM albums WHERE sales < 20.0 ORDER BY sales DESC;
 -- Q4f: All the albums with a genre of "Rock". Why do these query results not include albums with a genre of "Hard rock" or "Progressive rock"?
 SELECT * FROM albums WHERE genre = 'Rock';
 -- A: This query outputs a specific match of "Rock". Use '%Rock%' to get all genres with the word "Rock" in it
+-- SELECT * FROM albums WHERE genre LIKE '%Rock%';
