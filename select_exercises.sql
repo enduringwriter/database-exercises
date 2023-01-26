@@ -38,32 +38,47 @@ SELECT DISTINCT artist FROM albums;
 DESCRIBE albums;
 
 -- Q3d: What is the oldest release date for any album in the albums table? What is the most recent release date?
-SELECT * FROM albums ORDER BY release_date ASC LIMIT 1;
+SELECT * FROM albums
+ORDER BY release_date ASC LIMIT 1;
+
 SELECT min(release_date) FROM albums;
 
-SELECT * FROM albums ORDER BY release_date DESC LIMIT 1;
+SELECT * FROM albums
+ORDER BY release_date DESC LIMIT 1;
+
 SELECT max(release_date) FROM albums;
 
 SELECT min(release_date), max(release_date) FROM albums;
 
 -- Q4a: The name of all albums by Pink Floyd
-SELECT artist, name FROM albums WHERE artist = 'Pink Floyd';
-SELECT * FROM albums WHERE artist IN ('Pink Floyd');
+SELECT artist, name FROM albums
+WHERE artist = 'Pink Floyd';
+
+SELECT * FROM albums
+WHERE artist IN ('Pink Floyd');
 
 -- Q4b: The year Sgt. Pepper's Lonely Hearts Club Band was released
-SELECT name, release_date FROM albums WHERE name = 'Sgt. Pepper\'s Lonely Hearts Club Band';
+SELECT name, release_date FROM albums
+WHERE name = 'Sgt. Pepper\'s Lonely Hearts Club Band';
 
 -- Q4c: The genre for the album Nevermind
-SELECT name, genre FROM albums where name = 'Nevermind';
+SELECT name, genre FROM albums
+WHERE name = 'Nevermind';
 
 -- Q4d: Which albums were released in the 1990s
-SELECT name, release_date FROM albums WHERE release_date >= 1990 AND release_date <= 1999;
-SELECT name, release_date FROM albums WHERE release_date BETWEEN 1990 AND 1999;
+SELECT name, release_date FROM albums
+WHERE release_date >= 1990 AND release_date <= 1999;
+
+SELECT name, release_date FROM albums
+WHERE release_date BETWEEN 1990 AND 1999;
 
 -- Q4e: Which albums had less than 20 million certified sales
-SELECT name, sales FROM albums WHERE sales < 20.0 ORDER BY sales DESC;
+SELECT name, sales FROM albums
+WHERE sales < 20.0
+ORDER BY sales DESC;
 
 -- Q4f: All the albums with a genre of "Rock". Why do these query results not include albums with a genre of "Hard rock" or "Progressive rock"?
-SELECT * FROM albums WHERE genre = 'Rock';
+SELECT * FROM albums
+WHERE genre = 'Rock';
 -- A: This query outputs a specific match of "Rock". Use '%Rock%' to get all genres with the word "Rock" in it
 -- SELECT * FROM albums WHERE genre LIKE '%Rock%';
