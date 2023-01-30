@@ -1,6 +1,6 @@
 /*
 Keith Stateson
-SQL Exercise 4: order_by_exercises
+SQL Exercise 4: order_by_exercises - uses where_exercises #3
 Codeup
 Note, the Answer is simply the command below the Question
 */
