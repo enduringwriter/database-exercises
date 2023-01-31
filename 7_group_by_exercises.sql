@@ -8,13 +8,16 @@ Codeup
 SHOW DATABASES;
 SHOW CREATE DATABASE employees;
 SHOW TABLES;
+USE employees;
 
 -- Q2: In your script, use DISTINCT to find the unique titles in the titles table.
 -- How many unique titles have there ever been?
-USE titles;
 DESCRIBE titles; -- columns include emp_no, title, from_date, to_date
 SELECT * FROM titles LIMIT 10;
 SELECT COUNT(DISTINCT title) FROM titles; -- 7
+
+SELECT DISTINCT title
+FROM titles;
 
 -- Q3: Find a list of all unique last names of all employees that start and end with 'E' using GROUP BY.
 USE employees;
@@ -25,13 +28,17 @@ WHERE last_name LIKE 'E%E'
 GROUP BY last_name;
 
 -- Q4: Find all unique combinations of first and last names of all employees whose last names start and end with 'E'
-SELECT last_name, first_name FROM employees
+SELECT first_name, last_name FROM employees
 WHERE last_name LIKE 'E%E'
-GROUP BY last_name, first_name;
+GROUP BY first_name, last_name;
 
 -- Q5: Find the unique last names with a 'q' but not 'qu'. Include those names in a comment in your sql code.
 -- Chleq, Lindqvist, Qiwen
 SELECT last_name FROM employees
+WHERE last_name LIKE '%q%' AND last_name NOT LIKE '%qu%'
+GROUP BY last_name;
+
+SELECT DISTINCT last_name FROM employees
 WHERE last_name LIKE '%q%' AND last_name NOT LIKE '%qu%'
 GROUP BY last_name;
 
@@ -90,8 +97,9 @@ SELECT * FROM salaries LIMIT 10;
 SELECT * FROM salaries;
 SELECT max(to_date) from salaries; -- find keyterm to denote current employees
 
-SELECT AVG(salary) FROM salaries
-WHERE to_date NOT LIKE '9999%';
+SELECT emp_no, AVG(salary) FROM salaries
+WHERE to_date NOT LIKE '9999%'
+GROUP BY emp_no;
 
 -- Bonus Q2: Using the dept_emp table, count how many current employees work in each department.
 -- The query result should show 9 rows, one for each department and the employee count.
