@@ -9,61 +9,54 @@ SHOW DATABASES;
 SHOW CREATE DATABASE employees;
 SHOW TABLES;
 USE employees;
+SELECT * FROM employees LIMIT 10; -- get overview of table and pin it
 
 -- Q2: In your script, use DISTINCT to find the unique titles in the titles table.
--- How many unique titles have there ever been?
+-- How many unique titles have there ever been? 7
 DESCRIBE titles; -- columns include emp_no, title, from_date, to_date
-SELECT * FROM titles LIMIT 10;
-SELECT COUNT(DISTINCT title) FROM titles; -- 7
-
-SELECT DISTINCT title
-FROM titles;
+SELECT COUNT(DISTINCT title) FROM titles;
 
 -- Q3: Find a list of all unique last names of all employees that start and end with 'E' using GROUP BY.
-USE employees;
-SELECT * FROM employees LIMIT 10;
-
 SELECT last_name FROM employees
 WHERE last_name LIKE 'E%E'
 GROUP BY last_name;
 
--- Q4: Find all unique combinations of first and last names of all employees whose last names start and end with 'E'
+-- Q4: Find all unique combinations of first and last names of all employees whose last names start and end with 'E'.
 SELECT first_name, last_name FROM employees
 WHERE last_name LIKE 'E%E'
 GROUP BY first_name, last_name;
 
 -- Q5: Find the unique last names with a 'q' but not 'qu'. Include those names in a comment in your sql code.
--- Chleq, Lindqvist, Qiwen
+-- two methods that achieve the same result: Chleq, Lindqvist, Qiwen
 SELECT last_name FROM employees
 WHERE last_name LIKE '%q%' AND last_name NOT LIKE '%qu%'
 GROUP BY last_name;
 
 SELECT DISTINCT last_name FROM employees
-WHERE last_name LIKE '%q%' AND last_name NOT LIKE '%qu%'
-GROUP BY last_name;
+WHERE last_name LIKE '%q%' AND last_name NOT LIKE '%qu%';
 
 -- Q6: Add a COUNT() to your results (the query above) to find the number of employees with the same last name.
 SELECT last_name, count(last_name) FROM employees
 WHERE last_name LIKE '%q%' AND last_name NOT LIKE '%qu%'
 GROUP BY last_name;
 
--- Q7: Find all all employees with first names 'Irena', 'Vidya', or 'Maya'.
+-- Q7: Find all employees with first names 'Irena', 'Vidya', or 'Maya'.
 -- Use COUNT(*) and GROUP BY to find the number of employees for each gender with those names.
-SELECT first_name, count(first_name) FROM employees
+SELECT gender, first_name, count(first_name) FROM employees
 WHERE first_name IN ('Irena', 'Vidya', 'Maya')
-GROUP BY first_name;
+GROUP BY first_name, gender
+ORDER BY first_name;
 
 -- Q8: Using your query that generates a username for all of the employees,
--- generate a count employees for each unique username.
--- 300024
+-- generate a count employees for each unique username. 300024
 SELECT
-	CONCAT(
+	LOWER(CONCAT(
 		SUBSTR(first_name, 1, 1),
 		SUBSTR(last_name, 1, 4),
 		'_',
 		LPAD(month(birth_date), 2, 0),
 		SUBSTR(birth_date, 3, 2)
-		) AS user_name,
+		)) AS user_name,
     COUNT(*)
 FROM employees
 GROUP BY user_name;
@@ -73,18 +66,18 @@ GROUP BY user_name;
 -- Bonus: How many duplicate usernames are there from your previous query? 13,251
 -- NOTE: remove query limit, if applicable
 SELECT
-	CONCAT(
+	LOWER(CONCAT(
 		SUBSTR(first_name, 1, 1),
 		SUBSTR(last_name, 1, 4),
 		'_',
 		LPAD(month(birth_date), 2, 0),
 		SUBSTR(birth_date, 3, 2)
-		) AS user_name,    
-    COUNT(*) AS count
+		)) AS user_name,    
+    COUNT(*)
 FROM employees
 GROUP BY user_name
-HAVING count > 1
-ORDER BY count DESC;
+HAVING COUNT(*) > 1
+ORDER BY COUNT(*) DESC;
 
 /*
 Bonus: More practice with aggregate functions
@@ -133,7 +126,6 @@ GROUP BY emp_no
 HAVING max_sal > 150000;
 
 -- Bonus Q8: Find the average salary for each employee where that average salary is between $80k and $90k.
-SELECT emp_no, AVG(salary) AS ave_sal FROM salaries
+SELECT emp_no, AVG(salary) AS avg_sal FROM salaries
 GROUP BY emp_no
-HAVING ave_sal > 80000 AND ave_sal < 90000;
--- QUESTION: why does the command not work unless "AS ave_sal" is used?
+HAVING avg_sal > 80000 AND avg_sal < 90000;

@@ -2,12 +2,16 @@
 Keith Stateson
 SQL Exercise 5: limit_exercises
 Codeup
-Note, the Answer is simply the command below the Question
 */
 
+SHOW DATABASES;
 USE employees;
+SELECT DATABASE();
+SHOW CREATE DATABASE employees;
+
+SHOW TABLES;
 DESCRIBE employees;
-SELECT * FROM employees LIMIT 1;
+SELECT * FROM employees LIMIT 10; -- get overview of table and pin it
 
 -- Q2: List the first 10 distinct last name sorted in descending order.
 SELECT DISTINCT last_name FROM employees
