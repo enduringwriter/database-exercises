@@ -129,16 +129,18 @@ JOIN salaries USING (emp_no)
 GROUP BY departments.dept_name
 ORDER BY average_salary DESC;
 
--- Q11:Bonus Find the names of all current employees, their department name, and their current manager's name.
+-- Q11 Bonus: Find the names of all current employees, their department name, and their current manager's name.
 SELECT * FROM dept_manager LIMIT 1;
 
--- Q12: Bonus Who is the highest paid employee within each department.
-SELECT employees.first_name, employees.last_name, departments.dept_name, max(salaries.salary)
+-- haven't started yet on Q11
+
+-- Q12 Bonus: Who is the highest paid employee within each department.
+SELECT employees.first_name, employees.last_name, departments.dept_name, salaries.salary)
 FROM employees
 JOIN salaries USING (emp_no)
 JOIN dept_emp USING (emp_no)
 JOIN departments USING (dept_no)
-WHERE departments.dept_name = 'Marketing'
-GROUP BY departments.dept_name
-ORDER BY salaries.salary DESC
-Limit 10;
+WHERE salaries.to_date LIKE '9999%' AND dept_emp.to_date LIKE '9999%' AND salaries.salary
+	= (SELECT MAX(salaries.salary) FROM departments);
+
+-- need help on Q12 or wait for lesson on subqueries
