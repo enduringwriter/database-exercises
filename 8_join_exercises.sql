@@ -90,7 +90,7 @@ SELECT * FROM salaries
 JOIN dept_emp USING (emp_no) -- USING (emp_no) is the same as: salaries.emp_no = dept_emp.emp_no
 LIMIT 10;
 
-SELECT DISTINCT departments.dept_name AS 'dept_name',
+SELECT departments.dept_name AS 'dept_name',
 	AVG(salaries.salary) AS 'average_salary'
 FROM salaries
 JOIN dept_emp ON salaries.emp_no = dept_emp.emp_no
@@ -112,13 +112,33 @@ ORDER BY salaries.salary DESC
 Limit 1;
 
 -- Q9: Which current department manager has the highest salary?
-
+SELECT employees.first_name, employees.last_name, salaries.salary, departments.dept_name
+FROM salaries
+JOIN employees USING (emp_no)
+JOIN dept_manager USING (emp_no)
+JOIN departments USING (dept_no)
+WHERE salaries.to_date LIKE '9999%' AND dept_manager.to_date LIKE '9999%'
+ORDER BY salaries.salary DESC
+LIMIT 1;
 
 -- Q10: Determine the average salary for each department. Use all salary information and round your results.
-
+SELECT departments.dept_name AS dept_name, ROUND(AVG(salaries.salary)) AS average_salary
+FROM departments
+JOIN dept_emp USING (dept_no)
+JOIN salaries USING (emp_no)
+GROUP BY departments.dept_name
+ORDER BY average_salary DESC;
 
 -- Q11:Bonus Find the names of all current employees, their department name, and their current manager's name.
-
+SELECT * FROM dept_manager LIMIT 1;
 
 -- Q12: Bonus Who is the highest paid employee within each department.
-
+SELECT employees.first_name, employees.last_name, departments.dept_name, max(salaries.salary)
+FROM employees
+JOIN salaries USING (emp_no)
+JOIN dept_emp USING (emp_no)
+JOIN departments USING (dept_no)
+WHERE departments.dept_name = 'Marketing'
+GROUP BY departments.dept_name
+ORDER BY salaries.salary DESC
+Limit 10;
