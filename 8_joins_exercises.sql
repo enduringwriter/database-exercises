@@ -2,6 +2,7 @@
 Keith Stateson
 SQL Exercise 8: joins_exercises
 Codeup
+Hint using JOIN: write schemas fro the tables to be joined
 */
 
 SHOW DATABASES;
@@ -38,10 +39,10 @@ SELECT * FROM employees LIMIT 10; -- Find format/nomenclature of gender: F
 SELECT * FROM dept_manager LIMIT 10; -- Explore dept_manager table: shows multiple managers for one department b/c some are former managers
 SELECT to_date FROM dept_manager WHERE to_date > now(); -- Find date fromat of current employees: 9999-01-01
 
-SELECT departments.dept_name AS 'Department Name',
-	CONCAT(employees.first_name, ' ', employees.last_name) AS 'Manager Name'
+SELECT departments.dept_name 'Department Name', -- "AS" is optional
+	CONCAT(employees.first_name, ' ', employees.last_name) 'Manager Name' -- "AS" is optional
 FROM employees
-JOIN dept_manager ON employees.emp_no = dept_manager.emp_no
+INNER JOIN dept_manager ON employees.emp_no = dept_manager.emp_no -- default of "JOIN" is "INNER JOIN"
 JOIN departments ON departments.dept_no = dept_manager.dept_no
 WHERE employees.gender = 'F' AND dept_manager.to_date LIKE '9999%'
 ORDER BY departments.dept_name ASC;
