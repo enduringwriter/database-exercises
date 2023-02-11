@@ -27,7 +27,7 @@ WHERE last_name LIKE 'E%E';
 -- Q4: Find all employees hired in the 90s and born on Christmas.
 -- Use datediff() function to find how many days they have been working at the company.
 -- Hint: You will also need to use NOW() or CURDATE().
-SELECT hire_date, CONCAT(FORMAT(DATEDIFF(CURDATE(), hire_date), 'N'), ' days') as Days_at_Co
+SELECT hire_date, CONCAT(FORMAT(DATEDIFF(CURDATE(), hire_date), 'N'), ' days') AS Days_at_Co
 FROM employees
 WHERE hire_date LIKE '199%' AND birth_date LIKE '%12-25';
 
@@ -38,7 +38,7 @@ SELECT * FROM salaries LIMIT 1;
 
 -- get employees who are currently employed
 SELECT * FROM salaries;
-SELECT max(to_date) from salaries;
+SELECT max(to_date) FROM salaries;
 
 -- another way to get employees who are currently employed
 SELECT * FROM salaries

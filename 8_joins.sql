@@ -8,7 +8,7 @@ Hint using JOIN: write schemas fro the tables to be joined
 SHOW DATABASES;
 USE employees;
 SELECT DATABASE();
-SHOW tables; -- departments, dept_emp, dept_manager, employees, salaries, titles
+SHOW TABLES; -- departments, dept_emp, dept_manager, employees, salaries, titles
 
 DESCRIBE departments; -- dept_no, dept_name
 DESCRIBE dept_emp; -- emp_no, dept_no, from_date, to_date
