@@ -81,7 +81,7 @@ AND to_date LIKE '9999%'
 -- Q6a: How many current salaries are within 1 standard deviation of the current highest salary: 83
 -- Hint there is std deviation of income above the max salary b/c its the max salary.
 -- Hint: you can use a built in function to calculate the standard deviation.
--- Q6b: What percentage of all salaries is this: 
+-- Q6b: What percentage of all salaries is this: 0.0346 %
 -- Hint: You will likely use multiple subqueries in a variety of ways
 -- Hint: It's good practice to write out all of the small queries that you can.
 -- Add a comment above the query showing the number of rows returned.
@@ -90,7 +90,7 @@ AND to_date LIKE '9999%'
 SELECT STDDEV(salary) FROM salaries WHERE to_date LIKE '9999%';  -- 17309.95933634675
 SELECT MAX(salary) FROM salaries WHERE to_date LIKE '9999%';  -- 158220
 
-SELECT count(*) FROM salaries
+SELECT COUNT(*) FROM salaries
 WHERE to_date LIKE '9999%' AND salary >
 	(
     (SELECT MAX(salary) FROM salaries WHERE to_date LIKE '9999%') -
@@ -98,4 +98,18 @@ WHERE to_date LIKE '9999%' AND salary >
     )
 ;
 
-SELECT COUNT (salary) FROM salaries WHERE to_date LIKE '9999%';
+SELECT COUNT(salary) FROM salaries WHERE to_date LIKE '9999%'; -- 240124 total salaries
+
+SELECT
+	(
+	SELECT COUNT(*) FROM salaries
+	WHERE to_date LIKE '9999%' AND salary >
+		(
+		(SELECT MAX(salary) FROM salaries WHERE to_date LIKE '9999%') -
+		(SELECT STDDEV(salary) FROM salaries WHERE to_date LIKE '9999%')
+		)
+	)
+	/
+    (SELECT COUNT(salary) FROM salaries WHERE to_date LIKE '9999%')
+	* 100
+;
