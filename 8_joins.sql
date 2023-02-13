@@ -1,8 +1,7 @@
 /*
 Keith Stateson
 SQL Exercise 8: joins_exercises
-Codeup
-Hint using JOIN: write schemas fro the tables to be joined
+Hint using JOIN: write schemas from the tables to be joined
 */
 
 SHOW DATABASES;

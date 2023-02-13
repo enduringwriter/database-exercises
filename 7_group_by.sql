@@ -1,8 +1,6 @@
 /*
 Keith Stateson
 SQL Exercise 7: group_by_exercises
-and Bonus Questions
-Codeup
 */
 
 SHOW DATABASES;

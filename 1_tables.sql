@@ -1,7 +1,6 @@
 /*
 Keith Stateson
 SQL Exercise 1: tables_exercises
-Codeup
 */
 
 SHOW DATABASES; -- list all the databases

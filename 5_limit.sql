@@ -1,7 +1,6 @@
 /*
 Keith Stateson
 SQL Exercise 5: limit_exercises
-Codeup
 */
 
 SHOW DATABASES;

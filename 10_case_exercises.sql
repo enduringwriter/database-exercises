@@ -1,7 +1,6 @@
 /*
 Keith Stateson
 SQL Exercise 10: CASE statement and IF function
-Codeup
 */
 
 SHOW DATABASES;

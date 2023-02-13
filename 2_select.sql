@@ -1,7 +1,6 @@
 /*
 Keith Stateson
 SQL Exercise 2: select_exercises
-Codeup
 */
 
 SHOW DATABASES; -- view databases to select from

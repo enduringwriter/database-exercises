@@ -1,7 +1,6 @@
 /*
 Keith Stateson
 SQL Exercise 4: order_by_exercises - uses where_exercises #3
-Codeup
 */
 
 SHOW DATABASES;

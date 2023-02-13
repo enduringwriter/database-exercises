@@ -1,7 +1,6 @@
 /*
 Keith Stateson
 SQL Exercise 9: subqueries
-Codeup
 */
 
 SHOW DATABASES;
