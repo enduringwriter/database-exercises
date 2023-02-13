@@ -52,6 +52,8 @@ LIMIT 100;
 -- Q3: How many employees (current or previous) were born in each decade?
 SELECT birth_date FROM employees LIMIT 10;
 
+SELECT COUNT(birth_date) FROM employees;  -- 300024
+
 SELECT MIN(birth_date), MAX(birth_date) FROM employees;  -- min = 1952-02-01, max = 1965-02-01
 
 SELECT COUNT(birth_date) FROM employees
@@ -59,9 +61,9 @@ WHERE birth_date >= '1950-01-01' AND birth_date < '1960-01-01' LIMIT 100;  -- Bi
 
 SELECT *,
 	CASE
-		WHEN to_date
-        WHEN 
-		ELSE ???
+		WHEN birth_date >= '1950-01-01' AND birth_date < '1960-01-01' THEN 'birthday\'s 1950\'s'
+        WHEN birth_date >= '1960-01-01' AND birth_date < '1970-01-01' THEN 'birthday\'s 1960\'s'
+		ELSE birth_date
 END AS Birth_Decade
 FROM employees
 ORDER BY Birth_Decade
@@ -71,3 +73,18 @@ LIMIT 100;
 -- ==========================================
 -- Q4: What is the current average salary for each of the following department groups: R&D, 
 -- Sales & Marketing, Prod & QM, Finance & HR, Customer Service?
+
+SELECT AVG(salary),
+	CASE
+		WHEN dept_name IN ('research', 'development') THEN 'R&D'
+        WHEN dept_name IN ('sales', 'marketing') THEN 'Sales & Marketing'
+        WHEN dept_name IN ('Production', 'Quality Management') THEN 'Prod & QM'
+        WHEN dept_name IN ('Finance', 'Human Resources') THEN 'Finance & HR'
+        ELSE dept_name
+	END AS dept_group
+FROM departments
+JOIN dept_emp de USING (dept_no)
+JOIN salaries AS s USING (emp_no)
+WHERE de.to_date LIKE '9999%' AND s.to_date LIKE '9999%'
+GROUP BY dept_group
+;
