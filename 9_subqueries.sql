@@ -16,15 +16,16 @@ DESCRIBE salaries; -- emp_no, salary, from_date, to_date
 DESCRIBE titles; -- emp_no, title, from_date, to_date
 
 -- get employees who are currently employed using one of the following methods:
+SELECT MAX(to_date) FROM salaries;  -- 9999-01-01
+SELECT * FROM salaries WHERE to_date > NOW() LIMIT 10;
 SELECT DISTINCT to_date FROM salaries ORDER BY to_date DESC LIMIT 10;
-SELECT MAX(to_date) FROM salaries;
-SELECT * FROM salaries WHERE to_date > NOW();
 
 
 -- ==========================================
 -- Q1: Find all the current employees with the same hire date as employee 101010 using a subquery.
-SELECT first_name, last_name FROM employees
-WHERE hire_date = (
+SELECT COUNT(*) FROM employees
+JOIN salaries USING (emp_no)
+WHERE to_date LIKE '9999%' and hire_date = (
 	SELECT hire_date FROM employees
     WHERE emp_no = '101010'
 );
