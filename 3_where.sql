@@ -37,7 +37,7 @@ SELECT * FROM employees
 WHERE last_name LIKE 'E%' OR last_name LIKE '%E';
 SELECT COUNT(*) FROM employees WHERE last_name LIKE 'E%' OR last_name LIKE '%E';
 
--- Q6b: Find all current or previous employees whose last name ends with 'E', but does not start with 'E'?. 42 records
+-- Q6b: Find all current or previous employees whose last name ends with 'E', but does not start with 'E'?. 23393 records
 SELECT * FROM employees
 WHERE last_name LIKE '%E' AND last_name NOT LIKE 'E%';
 SELECT COUNT(*) FROM employees WHERE last_name LIKE '%E' AND last_name NOT LIKE 'E%';
