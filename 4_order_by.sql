@@ -28,7 +28,8 @@ SELECT first_name, last_name FROM employees
 WHERE first_name = 'Irena' OR first_name = 'Vidya' OR first_name = 'Maya'
 -- WHERE first_name IN ('Irena', 'Vidya', 'Maya') -- alternate option instead of using "OR"
 ORDER BY first_name, last_name;
--- LIMIT 1; -- optional, and add ASC or DESC to get the first and last entry
+-- LIMIT 1; -- optional, and add ASC or DESC to get the first and last entry, but would have to use DESC for each field, for example:
+-- ORDER BY first_name DESC, last_name DESC
 
 -- Q4: Find all current or previous employees with first names 'Irena', 'Vidya', or 'Maya', using OR, and who is male.
 -- And order your results returned by last name and then first name
@@ -59,7 +60,7 @@ WHERE last_name LIKE 'E%e'
 ORDER BY hire_date DESC, birth_date;
 
 -- Q7: Find all employees hired in the 90s and born on Christmas.
--- Sort the results so that the oldest employee who was hired last is the first result. 362 records, Tremaine Eugenio, Gudjon Vakili
+-- Sort the results so that the oldest employee who was hired last is the first result. 362 records
 SELECT first_name, last_name, birth_date, hire_date FROM employees
 WHERE hire_date LIKE '199%' AND birth_date LIKE '%-12-25'
 ORDER BY birth_date ASC, hire_date DESC;
