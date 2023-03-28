@@ -27,7 +27,8 @@ ORDER BY hire_date
 LIMIT 5;
 
 -- Q4: Update the query to find the tenth page of results. If every page has five employees.
--- page length * n-1 = offset 
+-- offset value = number of results per page * (page number - 1)
+-- example: 10th page of results has an offset value of 5 * (10 - 1) => 5 * 9 => 45
 SELECT * FROM employees
 WHERE hire_date LIKE '199%' AND birth_date LIKE '%12-25'
 ORDER BY hire_date
